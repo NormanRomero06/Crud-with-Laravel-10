@@ -10,6 +10,14 @@
             <a href="" class="btn btn-primary">Crear tarea</a>
         </div>
     </div>
+    @if (Session::get('success'))
+    <div class="alert alert-success">
+        <strong>{{Session::get('success')}}  
+        </strong> <br>
+      
+    </div>
+        
+    @endif
 
     <div class="col-12 mt-4">
         <table class="table table-bordered text-white">
@@ -20,14 +28,15 @@
                 <th>Estado</th>
                 <th>Acción</th>
             </tr>
-            <tr>
-                <td class="fw-bold">Estudiar Laravel</td>
-                <td>Primer CRUD con laravel 10</td>
+            @foreach ($tasks as $task)
+                 <tr>
+                <td class="fw-bold">{{$task->title}}</td>
+                <td>{{$task->description}}</td>
                 <td>
-                    31/03/23
+                    {{$task->due_date}}
                 </td>
                 <td>
-                    <span class="badge bg-warning fs-6">Pendiente</span>
+                    <span class="badge bg-warning fs-6">{{$task->status}}</span>
                 </td>
                 <td>
                     <a href="" class="btn btn-warning">Editar</a>
@@ -37,6 +46,8 @@
                     </form>
                 </td>
             </tr>
+            @endforeach
+      
         </table>
     </div>
 </div>
